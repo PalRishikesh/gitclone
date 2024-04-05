@@ -20,7 +20,6 @@ nav .wrapper {
   position: relative;
   max-width: 1300px;
   padding: 0px 4vw;
-  /* padding: 2vw 7vw; */
   height: 70px;
   line-height: 70px;
   margin: auto;
@@ -385,10 +384,3 @@ nav input {
   font-weight: 600;
 }
 
-/* --------Check-------- */
-/* #hover-content {
-  display:none;
-}
-#parent:hover #hover-content {
-  display:block;
-} */
