@@ -18,7 +18,7 @@ nav {
 }
 nav .wrapper {
   position: relative;
-  max-width: 1300px;
+  /* max-width: 1300px; */
   padding: 0px 4vw;
   height: 70px;
   line-height: 70px;
@@ -48,7 +48,7 @@ nav .wrapper {
   font-size: 18px;
   font-weight: 200;
   padding: 4px 20px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   transition: all 0.3s ease;
 
   /* padding: 0 10px; */
@@ -124,12 +124,19 @@ nav .wrapper {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 .mega-box .content .row {
-  /* width: calc(25% - 30px); */
+  width: calc(25% - 30px);
   line-height: 45px;
 }
 .mega-box .content .rowDisp {
   display: flex;
   background-color: #73ad21;
+}
+ul.mega-links li>a {
+  padding: 5px 1px;
+}
+.sub-menu-link{
+  display: flex;
+  justify-content: space-between;
 }
 /* .content .row img{
   width: 100%;
@@ -183,20 +190,20 @@ nav .wrapper {
   background-color: #f11616;
   margin: 0 4rem;
 } */
-.row .mega-links li a::after {
+/* .row .mega-links li a::after {
   content: ">";
   color: #fff;
   margin-left: 0.5rem;
-}
+} */
 .row .mega-links li a {
   /* padding: 5rem 0; */
   /* background: #000; */
-  margin: 0 30px;
+  /* margin: 0 30px; */
   border-bottom: 1px solid #fff;
-  padding: 1rem 20px;
+  /* padding: 1rem 20px; */
   color: #d9d9d9;
   font-size: 17px;
-  display: block;
+  /* display: block; */
 }
 
 .show-hover {
