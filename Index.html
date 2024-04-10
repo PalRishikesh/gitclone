@@ -7,90 +7,262 @@
     <title>Via-catalyst</title>
     <!-- <link rel="stylesheet" href="style.css"> -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="../Css//Test.css" />
+    <link rel="stylesheet" href="../Css/Test.css" />
     <link rel="stylesheet" href="../Css/Animation.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
+    <link
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
-    <nav>
-      <div class="wrapper">
-        <div class="logo"><a href="/">via catalyst</a></div>
-        <input type="radio" name="slider" id="menu-btn" />
-        <input type="radio" name="slider" id="close-btn" />
-        <ul class="nav-links">
-          <label for="close-btn" class="btn close-btn"
-            ><i class="fas fa-times"></i
-          ></label>
-          <li>
-            <a href="/Who we are">Who we are</a>
-            <div class="mega-box">
-              <div class="content">
-                <div class="row">
-                  <ul class="mega-links">
-                    <li>
-                      <a href="#" class="sub-menu-link"
-                        >Overview
-                        <span>></span>
-                      </a>
-                    </li>
-                    <li class="About-link-hover">
-                      <a href="#" class="sub-menu-link"
-                        >About us
-                        <span>></span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+    <div id="menu-container"></div>
+    <div
+      class="main-body"
+      style="
+        color: white;
+        position: absolute;
+        margin-top: 70px;
+        width: 100%;
+        max-height: 100%;
+      "
+    >
+      <div>
+        <section class="slider-container">
+          <ul class="slides">
+            <li class="selected">
+              <button class="gallery-call-btn">Talk to Us</button>
+            </li>
+            <li>
+              <button class="gallery-call-btn">Talk to Us</button>
+              
+            </li>
+            <li>
+              <div class="gallery-center-text">
+                <h2>Blockchain</h2>
+                <p>Build your Robust Application with Blockchain Technology</p>
               </div>
-            </div>
-          </li>
-          <li>
-            <a href="#" class="desktop-item">Our Thinking</a>
-          </li>
-          <li>
-            <a href="#" class="desktop-item">Careers</a>
-          </li>
-
-          <!-- <button class="talk-btn"><a href="#">Talk to Us</a></button> -->
-          <a href="./Pages/TalkToUs">
-            <button class="button-92" role="button">Talk to Us</button>
-          </a>
-        </ul>
-
-        <label for="menu-btn" class="btn menu-btn"
-          ><i class="fas fa-bars"></i
-        ></label>
+            </li>
+          </ul>
+          <ul class="slider-nav">
+            <li>
+              <a class="next" href="#"><i class="fa fa-angle-right"></i></a>
+            </li>
+            <li>
+              <a class="prev" href="#"><i class="fa fa-angle-left"></i></a>
+            </li>
+          </ul>
+          <ol class="slider-dot-nav">
+            <li><a class="selected" href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+          </ol>
+        </section>
       </div>
-    </nav>
-
-    <div class="body-text">
-      <div class="title">Responsive Dropdown and Mega Menu</div>
-      <div class="sub-title">using only HTML & CSS</div>
-      <div class="trapdoor"></div>
+      <div>Body3</div>
     </div>
-
-    <script>
-      function myFunction() {
-        var x = document.getElementById("myDIV");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "block";
-        }
-      }
-
-      function myFunctions() {
-        var x = document.getElementById("myDIV2");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
-      }
-    </script>
   </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#menu-container").load("./layout/navbar.html");
+    // alert("HS")
+  });
+</script>
+<script>
+  var slider = $(".slider-container");
+  var slides = $(".slides li");
+  var slidesNumber = slides.length;
+  var arrowNav = $(".slider-nav a");
+  var dotNav = $(".slider-dot-nav");
+  var dots = $(".slider-dot-nav a");
+
+  var selectedSlide = 0;
+  var prevSlide = 0;
+  var intervalId;
+  var setAutoPlay = true;
+
+  arrowNav.on("click", function (event) {
+    event.preventDefault();
+    if ($(this).hasClass("next")) {
+      console.log("next");
+      var newSlideIndex = selectedSlide + 1;
+    } else {
+      console.log("prev");
+      var newSlideIndex = selectedSlide - 1;
+    }
+    showNewSlide(newSlideIndex);
+  });
+
+  dots.on("click", function (event) {
+    event.preventDefault();
+    var newSlideIndex = dots.index(this);
+    showNewSlide(newSlideIndex);
+  });
+
+  function autoPlay() {
+    intervalId = setInterval(function () {
+      showNewSlide(selectedSlide + 1);
+    }, 5000);
+  }
+
+  if (setAutoPlay) {
+    // autoPlay();
+  }
+
+  function showNewSlide(index) {
+    if (index < 0) {
+      index = slidesNumber - 1;
+    }
+    if (index > slidesNumber - 1) {
+      index = 0;
+    }
+    prevSlide = selectedSlide;
+    selectedSlide = index;
+
+    for (var i = 0; i < slidesNumber; i++) {
+      if (i < selectedSlide) {
+        slides.eq(i).addClass("move-left").removeClass("selected visible");
+        dots.eq(i).removeClass("selected");
+      } else if (i == selectedSlide) {
+        slides.eq(i).addClass("selected").removeClass("move-left");
+        dots.eq(i).addClass("selected");
+      } else {
+        slides.eq(i).removeClass("selected move-left visible");
+        dots.eq(i).removeClass("selected");
+      }
+    }
+
+    slides.eq(prevSlide).addClass("visible");
+  }
+</script>
+<style>
+  .slider-container {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+  }
+
+  .slides li {
+    position: absolute;
+    display: table;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transform: translateX(100%);
+    transition: transform 0.5s ease;
+  }
+
+  .slides li.selected {
+    z-index: 2;
+    transform: translateX(0);
+  }
+
+  .slides li.move-left {
+    transform: translateX(-100%);
+  }
+
+  .slides li.visible {
+    z-index: 2;
+  }
+
+  .slides li:nth-child(1) {
+    background: url("public/images/iot.jpg") no-repeat center center;
+    background-size: cover;
+  }
+  .slides li:nth-child(2) {
+    background: url("public/images/retail.jpg") no-repeat center center;
+    background-size: cover;
+  }
+  .slides li:nth-child(3) {
+    background: url("public/images/blockchain.jpg") no-repeat center center;
+    background-size: cover;
+  }
+  /* .slides li:nth-child(4) {
+    background: url(https://unsplash.it/1200/800?image=1070) no-repeat center
+      center;
+    background-size: cover;
+  } */
+
+  .slides li > div {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: #fff;
+  }
+
+  .slides h2 {
+    margin-top: 0;
+  }
+  .slider-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  .slider-nav a {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    font-size: 50px;
+    color: white;
+  }
+  .slider-nav a.next {
+    left: auto;
+    right: 10px;
+  }
+  .slider-dot-nav {
+    position: absolute;
+    z-index: 3;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .slider-dot-nav li {
+    display: inline-block;
+    margin-right: 15px;
+  }
+
+  .slider-dot-nav a {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+  }
+
+  .slider-dot-nav a.selected {
+    background: #fff;
+  }
+  .gallery-call-btn{
+    position: relative;
+    top: 75%;
+    left: 20%;
+    background-color: grey;
+    color: white;
+    padding: 10px 30px;
+    font-size: 15px;
+    border: 0px;
+    cursor: pointer;
+  }
+  .gallery-center-text{
+    background-color: #242526b8;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 44%;
+    left: 33%;
+    padding: 15px;
+  }
+</style>

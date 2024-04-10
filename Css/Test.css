@@ -252,7 +252,37 @@ ul.mega-links li>a {
   right: 30px;
   top: 10px;
 }
+.sub-menu-content{
+  width: calc(75% + 30px);
+    display: flex;
+}
+.col {
+  text-align: center;
+  width: 30%;
+  display: inline-block;
+  color: white;
+}
+.col-10{
+  width: 5%;
+  display: inline-block;
+}
+.sub-menu-content{
+  display: none;
+}
+#sub-menu-content-1{
+  /* display: block; */
+}
+.sub-menu-item{
+  display: block;
+  width: 100%;
+  line-height: normal;
+  background: none !important;
+  border-bottom: 0px !important;
+  text-align: left;
+  font-size: 14px !important;
+  padding-bottom: 15px !important;
 
+}
 @media screen and (max-width: 970px) {
   .wrapper .btn {
     display: block;
@@ -385,6 +415,7 @@ nav input {
   width: 100%;
   text-align: center;
   padding: 0 30px;
+  color: white;
 }
 .body-text div {
   font-size: 45px;
